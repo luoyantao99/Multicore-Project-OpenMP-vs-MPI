@@ -15,14 +15,14 @@ time mpiexec -n 4 ./reduction_MPI 10000000
 */
 
 void initialize_array(double *arr, int N) {
-    for (int i = 0; i < N; ++i) {
-        arr[i] = rand() % 100;
+    for (int i = 0; i < N; i++) {
+        arr[i] = i;
     }
 }
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        printf("Usage: mpiexec -n <number_of_processes> ./reduction_MPI N\n");
+        printf("Usage: mpiexec -n <number_of_processes> ./reduction_MPI <array_length>\n");
         return 1;
     }
     int N = atoi(argv[1]);
