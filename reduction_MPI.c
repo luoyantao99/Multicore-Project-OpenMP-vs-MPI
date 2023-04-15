@@ -14,7 +14,7 @@ execute
 time mpiexec -n 4 ./reduction_MPI 10000000
 */
 
-void initialize_array(double *arr, int N) {
+void initialize_array(size_t *arr, int N) {
     for (int i = 0; i < N; i++) {
         arr[i] = i;
     }
@@ -32,8 +32,8 @@ int main(int argc, char *argv[]) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-    double *arr = malloc(N * sizeof(double));
-    double local_sum = 0.0, global_sum = 0.0;
+    size_t *arr = malloc(N * sizeof(size_t));
+    size_t local_sum = 0, global_sum = 0;
 
     if (rank == 0) {
         initialize_array(arr, N);
@@ -53,8 +53,8 @@ int main(int argc, char *argv[]) {
     double end_time = MPI_Wtime();
     
     if (rank == 0) {
-        printf("Execution time with MPI: %lf seconds\n", end_time - start_time);
-        printf("Sum: %lf\n", global_sum);
+        printf("Execution time with MPI: %f seconds\n", end_time - start_time);
+        printf("Sum: %zu\n", global_sum);
     }
 
     free(arr);
