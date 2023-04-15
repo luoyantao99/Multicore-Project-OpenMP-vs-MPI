@@ -10,7 +10,7 @@
  time ./thread_creation_OpenMP <number of threads to create>
 */
 
-void dummy_function() {
+int dummy_function() {
     int x = 42;
     return x;
 }
