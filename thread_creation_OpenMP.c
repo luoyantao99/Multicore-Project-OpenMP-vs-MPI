@@ -2,17 +2,29 @@
 #include <stdlib.h>
 #include <omp.h>
 
-#define NUM_THREADS 100000
+/*
+ compile
+ gcc -fopenmp -Wall -std=c99 -o thread_creation_OpenMP thread_creation_OpenMP.c
+
+ execute
+ time ./thread_creation_OpenMP <number of threads to create>
+*/
 
 void dummy_function() {
     int x = 42;
+    return x;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        printf("Usage: ./reduction_OpenMP <number_of_threads> <array_length>\n");
+        return 1;
+    }
     double start_time = omp_get_wtime();
+    int NUM_THREADS = atoi(argv[1]);
 
-    #pragma omp parallel for num_threads(NUM_THREADS)
     for (int i = 0; i < NUM_THREADS; ++i) {
+        #pragma omp parallel num_threads(2)
         dummy_function();
     }
 
