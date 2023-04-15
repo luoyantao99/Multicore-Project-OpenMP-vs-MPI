@@ -1,10 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <mpi.h>
+#include <time.h>
 
-#define N 1024
+/*
+load mpi
+module load mpi/openmpi-x86_64
 
-void initialize_matrices(double *A, double *B, double *C) {
+compile
+mpicc -g -Wall -std=c99 -o matrix_MPI matrix_multiplication_MPI.c -lm
+
+execute
+time mpiexec -n 4 ./matrix_MPI 1000
+*/
+
+
+void initialize_matrices(double *A, double *B, double *C, int N) {
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < N; ++j) {
             A[i * N + j] = rand() % 100;
@@ -15,6 +26,12 @@ void initialize_matrices(double *A, double *B, double *C) {
 }
 
 int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        printf("Usage: mpiexec -n <number_of_processes> ./matrix_MPI <matrix_dimension>\n");
+        return 1;
+    }
+    int N = atoi(argv[1]);
+
     int rank, size;
 
     MPI_Init(&argc, &argv);
@@ -26,7 +43,7 @@ int main(int argc, char *argv[]) {
     double *C = malloc(N * N * sizeof(double));
 
     if (rank == 0) {
-        initialize_matrices(A, B, C);
+        initialize_matrices(A, B, C, N);
     }
 
     MPI_Bcast(B, N * N, MPI_DOUBLE, 0, MPI_COMM_WORLD);
@@ -41,5 +58,19 @@ int main(int argc, char *argv[]) {
             }
         }
     }
+    
+    MPI_Gather(C + (rank * N * N / size), N * N / size, MPI_DOUBLE, C, N * N / size, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+    double end_time = MPI_Wtime();
 
-    MPI_Gather(C + (rank * N * N / size), N * N /
+    if (rank == 0) {
+        printf("Matrix Multiplication Execution Time (MPI): %.3f seconds\n", end_time - start_time);
+    }
+
+    free(A);
+    free(B);
+    free(C);
+
+    MPI_Finalize();
+
+    return 0;
+}
