@@ -10,7 +10,7 @@ compile
 mpicc -g -Wall -std=c99 -o thread_creation_MPI thread_creation_MPI.c -lm
 
 execute
-mpiexec -n 4 ./reduction_MPI <number of processes to be created>
+mpiexec -n <number of processes to be created> ./reduction_MPI
 */
 
 int dummy_function() {
@@ -20,6 +20,7 @@ int dummy_function() {
 
 int main(int argc, char *argv[]) {
     int rank, size;
+    int NUM_PROCESSES = atoi(argv[2]);
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
