@@ -17,7 +17,7 @@ void initialize_array(double *arr, int N) {
     }
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     if (argc != 2) {
         printf("Usage: ./reduction_OpenMP <array_length>\n");
         return 1;
