@@ -18,11 +18,11 @@ void initialize_array(double *arr, int N) {
 }
 
 int main(int argc, char *argv[]) {
-    if (argc != 2) {
-        printf("Usage: ./reduction_OpenMP <array_length>\n");
+    if (argc != 3) {
+        printf("Usage: ./reduction_OpenMP <number_of_threads> <array_length>\n");
         return 1;
     }
-    int N = atoi(argv[1]);
+    int N = atoi(argv[2]);
 
     double *arr = malloc(N * sizeof(double));
     double sum = 0.0;
@@ -31,6 +31,7 @@ int main(int argc, char *argv[]) {
 
     double start_time = omp_get_wtime();
 
+    omp_set_num_threads(atoi(argv[1]));
     #pragma omp parallel for reduction(+:sum)
     for (int i = 0; i < N; ++i) {
         sum += arr[i];
