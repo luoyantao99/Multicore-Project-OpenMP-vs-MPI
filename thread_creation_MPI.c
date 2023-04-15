@@ -2,10 +2,20 @@
 #include <stdlib.h>
 #include <mpi.h>
 
-#define NUM_PROCESSES 100000
+/*
+load mpi
+module load mpi/openmpi-x86_64
 
-void dummy_function() {
+compile
+mpicc -g -Wall -std=c99 -o thread_creation_MPI thread_creation_MPI.c -lm
+
+execute
+mpiexec -n 4 ./reduction_MPI <number of processes to be created>
+*/
+
+int dummy_function() {
     int x = 42;
+    return x;
 }
 
 int main(int argc, char *argv[]) {
