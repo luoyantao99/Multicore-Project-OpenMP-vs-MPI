@@ -11,7 +11,7 @@ execute
 time ./reduction_OpenMP N
 */
 
-void initialize_array(double *arr, int N) {
+void initialize_array(int *arr, int N) {
     for (int i = 0; i < N; i++) {
         arr[i] = i;
     }
@@ -24,8 +24,8 @@ int main(int argc, char *argv[]) {
     }
     int N = atoi(argv[2]);
 
-    double *arr = malloc(N * sizeof(double));
-    double sum = 0;
+    int *arr = malloc(N * sizeof(int));
+    int sum = 0;
 
     initialize_array(arr, N);
 
@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
 
     double end_time = omp_get_wtime();
     printf("Execution time with OpenMP: %f seconds\n", end_time - start_time);
-    printf("Sum: %f\n", sum);
+    printf("Sum: %d\n", sum);
 
     free(arr);
     
