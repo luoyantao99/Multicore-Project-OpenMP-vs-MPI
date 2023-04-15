@@ -1,8 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <mpi.h>
+#include <time.h>
 
 #define N 100000000
+
+/*
+load mpi
+module load mpi/openmpi-x86_64
+
+compile
+mpicc -g -Wall -std=c99 -o reduction_MPI reduction_MPI.c -lm
+
+execute
+time mpiexec -n 4 ./reduction_MPI
+*/
 
 void initialize_array(double *arr) {
     for (int i = 0; i < N; ++i) {

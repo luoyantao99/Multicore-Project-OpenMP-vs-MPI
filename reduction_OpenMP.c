@@ -1,8 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <omp.h>
+#include <time.h>
 
 #define N 100000000
+
+/*
+compile
+gcc -fopenmp -Wall -std=c99 -o reduction_OpenMP reduction_OpenMP.c
+
+execute
+time ./reduction_OpenMP
+*/
 
 void initialize_array(double *arr) {
     for (int i = 0; i < N; ++i) {
