@@ -3,8 +3,6 @@
 #include <mpi.h>
 #include <time.h>
 
-#define N 100000000
-
 /*
 load mpi
 module load mpi/openmpi-x86_64
@@ -13,16 +11,21 @@ compile
 mpicc -g -Wall -std=c99 -o reduction_MPI reduction_MPI.c -lm
 
 execute
-time mpiexec -n 4 ./reduction_MPI
+time mpiexec -n 4 ./reduction_MPI 10000000
 */
 
-void initialize_array(double *arr) {
+void initialize_array(double *arr, int N) {
     for (int i = 0; i < N; ++i) {
         arr[i] = rand() % 100;
     }
 }
 
 int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        printf("Usage: mpiexec -n <number_of_processes> ./reduction_MPI N\n");
+        return 1;
+    }
+    int N = atoi(argv[1]);
     int rank, size;
 
     MPI_Init(&argc, &argv);
@@ -33,7 +36,7 @@ int main(int argc, char *argv[]) {
     double local_sum = 0.0, global_sum = 0.0;
 
     if (rank == 0) {
-        initialize_array(arr);
+        initialize_array(arr, N);
     }
 
     MPI_Bcast(arr, N, MPI_DOUBLE, 0, MPI_COMM_WORLD);
