@@ -7,7 +7,7 @@
  gcc -fopenmp -Wall -std=c99 -o thread_creation_OpenMP thread_creation_OpenMP.c
 
  execute
- time ./thread_creation_OpenMP <number of threads to create>
+ time ./thread_creation_OpenMP <number of thread creation>
 */
 
 int dummy_function() {
@@ -17,9 +17,10 @@ int dummy_function() {
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        printf("Usage: ./reduction_OpenMP <number_of_threads> <array_length>\n");
+        printf("Usage: ./thread_creation_OpenMP <number of thread creation>\n");
         return 1;
     }
+
     double start_time = omp_get_wtime();
     int NUM_THREADS = atoi(argv[1]);
 
