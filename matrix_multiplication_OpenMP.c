@@ -3,6 +3,9 @@
 #include <omp.h>
 #include <time.h>
 
+
+
+
 /*
 compile
 gcc -fopenmp -Wall -std=c99 -o matrix_OpenMP matrix_multiplication_OpenMP.c
