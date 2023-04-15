@@ -1,0 +1,1 @@
+# Multicore-Project-OpenMP-vs-MPI
