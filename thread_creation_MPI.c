@@ -16,7 +16,7 @@ mpiexec -n <number of processes to be created> ./thread_creation_MPI
 
 int dummy_function() {
     int x = 42;
-    return x;
+    return 0;
 }
 
 int main(int argc, char *argv[]) {
