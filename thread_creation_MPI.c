@@ -4,7 +4,7 @@
 
 /*
 load mpi
-module load mpi/openmpi-x86_64
+module load mpi/openmpi-4.1
 
 compile
 mpicc -g -Wall -std=c99 -o thread_creation_MPI thread_creation_MPI.c -lm
