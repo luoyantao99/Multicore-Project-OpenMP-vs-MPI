@@ -4,13 +4,14 @@
 
 /*
 load mpi
+module load gcc-12.2
 module load mpi/openmpi-4.1
 
 compile
 mpicc -g -Wall -std=c99 -o thread_creation_MPI thread_creation_MPI.c -lm
 
 execute
-mpiexec -n <number of processes to be created> ./reduction_MPI
+mpiexec -n <number of processes to be created> ./thread_creation_MPI
 */
 
 int dummy_function() {
