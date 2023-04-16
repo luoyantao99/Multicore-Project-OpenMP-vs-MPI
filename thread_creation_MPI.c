@@ -34,14 +34,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    double start_time = MPI_Wtime();
-
     dummy_function();
-
-    double end_time = MPI_Wtime();
-    if (rank == 0) {
-        printf("Execution time with MPI (creating %d processes): %lf seconds\n", NUM_PROCESSES, end_time - start_time);
-    }
 
     MPI_Finalize();
     return 0;
