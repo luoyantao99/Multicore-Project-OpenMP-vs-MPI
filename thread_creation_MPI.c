@@ -16,12 +16,11 @@ mpiexec -n <number of processes to be created> ./thread_creation_MPI
 
 int dummy_function() {
     int x = 42;
-    return 0;
+    return x;
 }
 
 int main(int argc, char *argv[]) {
     int rank, size;
-    int NUM_PROCESSES = atoi(argv[2]);
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
