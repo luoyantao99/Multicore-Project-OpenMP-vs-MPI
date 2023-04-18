@@ -18,8 +18,8 @@ time mpiexec -n 4 ./matrix_MPI 1000
 void initialize_matrices(double *A, double *B, double *C, int N) {
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < N; ++j) {
-            A[i * N + j] = rand() % 100;
-            B[i * N + j] = rand() % 100;
+            A[i * N + j] = i;
+            B[i * N + j] = j;
             C[i * N + j] = 0.0;
         }
     }
@@ -39,17 +39,29 @@ int main(int argc, char *argv[]) {
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
     double *A = malloc(N * N * sizeof(double));
+    if(!A) {
+        printf("Error allocating array A\n");
+        exit(1);
+	}
     double *B = malloc(N * N * sizeof(double));
+    if(!B) {
+        printf("Error allocating array B\n");
+        exit(1);
+	}
     double *C = malloc(N * N * sizeof(double));
+    if(!C) {
+        printf("Error allocating array C\n");
+        exit(1);
+	}
 
     if (rank == 0) {
         initialize_matrices(A, B, C, N);
     }
 
+    double start_time = MPI_Wtime();
+
     MPI_Bcast(B, N * N, MPI_DOUBLE, 0, MPI_COMM_WORLD);
     MPI_Scatter(A, N * N / size, MPI_DOUBLE, A + (rank * N * N / size), N * N / size, MPI_DOUBLE, 0, MPI_COMM_WORLD);
-
-    double start_time = MPI_Wtime();
 
     for (int i = 0; i < N / size; ++i) {
         for (int j = 0; j < N; ++j) {
@@ -60,10 +72,12 @@ int main(int argc, char *argv[]) {
     }
     
     MPI_Gather(C + (rank * N * N / size), N * N / size, MPI_DOUBLE, C, N * N / size, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+
     double end_time = MPI_Wtime();
 
     if (rank == 0) {
-        printf("Matrix Multiplication Execution Time (MPI): %.3f seconds\n", end_time - start_time);
+        printf("%f\n", end_time - start_time);
+        // printf("Matrix Multiplication Execution Time (MPI): %f seconds\n", end_time - start_time);
     }
 
     free(A);
@@ -71,6 +85,5 @@ int main(int argc, char *argv[]) {
     free(C);
 
     MPI_Finalize();
-
     return 0;
 }
