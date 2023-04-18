@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
 
     // double end_time = omp_get_wtime();
     // printf("Execution time with OpenMP: %f seconds\n", end_time - start_time);
-    // printf("Sum: %zu\n", sum);
+    printf("Sum: %zu\n", sum);
 
     free(arr);
     
