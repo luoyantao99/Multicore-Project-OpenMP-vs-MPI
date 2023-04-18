@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
 
     MPI_Bcast(arr, N, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
-    double start_time = MPI_Wtime();
+    // double start_time = MPI_Wtime();
 
     int chunk_size = N / size;
     for (int i = rank * chunk_size; i < (rank + 1) * chunk_size; ++i) {
@@ -50,12 +50,12 @@ int main(int argc, char *argv[]) {
 
     MPI_Reduce(&local_sum, &global_sum, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 
-    double end_time = MPI_Wtime();
+    // double end_time = MPI_Wtime();
     
-    if (rank == 0) {
-        printf("Execution time with MPI: %f seconds\n", end_time - start_time);
-        printf("Sum: %zu\n", global_sum);
-    }
+    // if (rank == 0) {
+    //     printf("Execution time with MPI: %f seconds\n", end_time - start_time);
+    //     printf("Sum: %zu\n", global_sum);
+    // }
 
     free(arr);
     MPI_Finalize();
