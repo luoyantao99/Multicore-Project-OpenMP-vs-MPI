@@ -26,39 +26,47 @@ int main(int argc, char *argv[]) {
         return 1;
     }
     int N = atoi(argv[1]);
-    int rank, size;
+    int my_rank, size;
 
     MPI_Init(&argc, &argv);
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-    size_t *arr = malloc(N * sizeof(size_t));
-    size_t local_sum = 0, global_sum = 0;
-
-    if (rank == 0) {
-        initialize_array(arr, N);
-    }
-
-    MPI_Bcast(arr, N, MPI_DOUBLE, 0, MPI_COMM_WORLD);
-
-    // double start_time = MPI_Wtime();
+    
+    size_t global_sum = 0;
+    size_t *arr = NULL;
 
     int chunk_size = N / size;
-    for (int i = rank * chunk_size; i < (rank + 1) * chunk_size; ++i) {
-        local_sum += arr[i];
+    size_t *local_arr = malloc(chunk_size * sizeof(size_t));
+
+    double start_time;
+
+    if (my_rank == 0) {
+        arr = malloc(N * sizeof(size_t));
+        initialize_array(arr, N);
+        start_time = MPI_Wtime();
+        MPI_Scatter(arr, chunk_size, MPI_UNSIGNED_LONG_LONG, local_arr, chunk_size, MPI_UNSIGNED_LONG_LONG, 0, MPI_COMM_WORLD);
+        free(arr);
+    }
+    else {
+        MPI_Scatter(arr, chunk_size, MPI_UNSIGNED_LONG_LONG, local_arr, chunk_size, MPI_UNSIGNED_LONG_LONG, 0, MPI_COMM_WORLD);
     }
 
-    MPI_Reduce(&local_sum, &global_sum, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    size_t local_sum = 0;
+    for (int i = 0; i < chunk_size; i++) {
+        local_sum += local_arr[i];
+    }
 
-    // double end_time = MPI_Wtime();
+    MPI_Reduce(&local_sum, &global_sum, 1, MPI_UNSIGNED_LONG_LONG, MPI_SUM, 0, MPI_COMM_WORLD);
+
+    double end_time = MPI_Wtime();
     
-    if (rank == 0) {
-        // printf("Execution time with MPI: %f seconds\n", end_time - start_time);
-        printf("Sum: %zu\n", global_sum);
+    if (my_rank == 0) {
+        printf("Execution time with MPI: %f seconds\n", end_time - start_time);
+        printf("Sum: %.zu\n", global_sum);
     }
 
-    free(arr);
+    
     MPI_Finalize();
-
     return 0;
 }
