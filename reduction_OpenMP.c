@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
 
     initialize_array(arr, N);
 
-    double start_time = omp_get_wtime();
+    // double start_time = omp_get_wtime();
 
     omp_set_num_threads(atoi(argv[1]));
     #pragma omp parallel for reduction(+:sum)
@@ -37,9 +37,9 @@ int main(int argc, char *argv[]) {
         sum += arr[i];
     }
 
-    double end_time = omp_get_wtime();
-    printf("Execution time with OpenMP: %f seconds\n", end_time - start_time);
-    printf("Sum: %zu\n", sum);
+    // double end_time = omp_get_wtime();
+    // printf("Execution time with OpenMP: %f seconds\n", end_time - start_time);
+    // printf("Sum: %zu\n", sum);
 
     free(arr);
     
