@@ -32,19 +32,24 @@ int main(int argc, char *argv[]) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-    size_t *arr = malloc(N * sizeof(size_t));
+    // size_t *arr = malloc(N * sizeof(size_t));
     size_t local_sum = 0, global_sum = 0;
 
-    if (rank == 0) {
-        initialize_array(arr, N);
-    }
+    // if (rank == 0) {
+    //     initialize_array(arr, N);
+    // }
 
-    MPI_Bcast(arr, N, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+    // MPI_Bcast(arr, N, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
     // double start_time = MPI_Wtime();
 
     int chunk_size = N / size;
-    for (int i = rank * chunk_size; i < (rank + 1) * chunk_size; ++i) {
+    
+    size_t *arr = malloc(chunk_size * sizeof(size_t));
+    initialize_array(arr, chunk_size);
+    
+    // for (int i = rank * chunk_size; i < (rank + 1) * chunk_size; ++i) {
+    for (int 0; i < chunk_size; ++i) {
         local_sum += arr[i];
     }
 
