@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
     initialize_array(arr, chunk_size);
     
     // for (int i = rank * chunk_size; i < (rank + 1) * chunk_size; ++i) {
-    for (int i = 0; i < chunk_size; ++i) {
+    for (int 0; i < chunk_size; ++i) {
         local_sum += arr[i];
     }
 
