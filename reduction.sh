@@ -2,33 +2,43 @@
 # waitsec=1
 # echo "running...... please wait"  $waitsec "S"
 
-tr=64
-size=1000000
 datestring=$(date +%m-%dT%H:%M:%S)
 
-for i in {1..10}
+for tr in {4,8,16,64}
 do
-    scriptname="reduction_OpenMP_${tr}_${size}"
-    file="./logs/${scriptname}_${datestring}.log"
-    # echo $file
+    for size in {1000000,10000000,50000000,100000000,500000000,1000000000}
+    do
+        for i in {1..10}
+        do
+            scriptname="reduction_OpenMP_${tr}_${size}"
+            file="./logs/${scriptname}_${datestring}.log"
+            # echo $file
 
-    echo "${datestring}: running OpenMP ${tr} ${size} ...... please wait"
-    { time ./reduction_OpenMP $tr $size; } 2>&1 | tee -a $file
+            echo "${datestring}: running OpenMP ${tr} ${size} ...... please wait"
+            { time ./reduction_OpenMP $tr $size; } 2>&1 | tee -a $file
 
-    # echo "running...... please wait" $waitsec "S" 
-    # sleep $waitsec
+            # echo "running...... please wait" $waitsec "S" 
+            # sleep $waitsec
+        done
+    done
 done
 
 
-for i in {1..10}
+for tr in {4,8,16,64}
 do
-    scriptname="reduction_MPI_${tr}_${size}"
-    file="./logs/${scriptname}_${datestring}.log"
-    # echo $file
+    for size in {1000000,10000000,50000000,100000000,500000000,1000000000}
+    do
+        for i in {1..10}
+        do
+            scriptname="reduction_MPI_${tr}_${size}"
+            file="./logs/${scriptname}_${datestring}.log"
+            # echo $file
 
-    echo "${datestring}: running MPI ${tr} ${size} ...... please wait"
-    { time mpiexec -n $tr ./reduction_MPI $size; } 2>&1 | tee -a $file
+            echo "${datestring}: running MPI ${tr} ${size} ...... please wait"
+            { time mpiexec -n $tr ./reduction_MPI $size; } 2>&1 | tee -a $file
 
-    # echo "running...... please wait" $waitsec "S" 
-    # sleep $waitsec
+            # echo "running...... please wait" $waitsec "S" 
+            # sleep $waitsec
+        done
+    done
 done
