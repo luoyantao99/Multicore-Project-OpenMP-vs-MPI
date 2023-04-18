@@ -1,9 +1,9 @@
 
 datestring=$(date +%m-%dT%H:%M:%S)
 
-for tr in {2,4,8,16,32}
+for tr in {2,4,8,16,32,64}
 do
-    for size in {10000000,100000000,500000000,1000000000}
+    for size in {250,500,1000,2000}
     do
         for i in {1..10}
         do
@@ -18,9 +18,9 @@ do
 done
 
 
-for tr in {2,4,8,16,32}
+for tr in {2,4,8,16,32,64}
 do
-    for size in {10000000,100000000,500000000,1000000000}
+    for size in {250,500,1000,2000}
     do
         for i in {1..10}
         do
@@ -33,3 +33,6 @@ do
         done
     done
 done
+
+
+echo "matrix benchmark finished"
