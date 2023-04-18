@@ -15,7 +15,7 @@ do
             # echo $file
 
             echo "${datestring}: running OpenMP ${tr} ${size} ...... please wait"
-            { time ./reduction_OpenMP $tr $size; } 2>&1 | tee -a $file
+            { ./reduction_OpenMP $tr $size; } 2>&1 | tee -a $file
 
             # echo "running...... please wait" $waitsec "S" 
             # sleep $waitsec
@@ -35,7 +35,7 @@ do
             # echo $file
 
             echo "${datestring}: running MPI ${tr} ${size} ...... please wait"
-            { time mpiexec -n $tr ./reduction_MPI $size; } 2>&1 | tee -a $file
+            { mpiexec -n $tr ./reduction_MPI $size; } 2>&1 | tee -a $file
 
             # echo "running...... please wait" $waitsec "S" 
             # sleep $waitsec

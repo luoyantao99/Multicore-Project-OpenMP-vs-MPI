@@ -62,8 +62,9 @@ int main(int argc, char *argv[]) {
     double end_time = MPI_Wtime();
     
     if (my_rank == 0) {
-        printf("Execution time with MPI: %f seconds\n", end_time - start_time);
-        printf("Sum: %.zu\n", global_sum);
+        printf("%f\n", end_time - start_time);
+        // printf("Execution time with MPI: %f seconds\n", end_time - start_time);
+        // printf("Sum: %.zu\n", global_sum);
     }
 
     
