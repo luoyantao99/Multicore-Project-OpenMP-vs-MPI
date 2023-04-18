@@ -33,17 +33,17 @@ int main(int argc, char *argv[]) {
     if(!A) {
         printf("Error allocating array A\n");
         exit(1);
-	}
+    }
     double *B = malloc(N * N * sizeof(double));
     if(!B) {
         printf("Error allocating array B\n");
         exit(1);
-	}
+    }
     double *C = malloc(N * N * sizeof(double));
     if(!C) {
         printf("Error allocating array C\n");
         exit(1);
-	}
+    }
     
     initialize_matrices(A, B, C, N);
 
