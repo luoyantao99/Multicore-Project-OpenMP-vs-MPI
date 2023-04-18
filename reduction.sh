@@ -14,7 +14,7 @@ do
             file="./logs/${scriptname}_${datestring}.log"
             # echo $file
 
-            echo "${datestring}: running OpenMP ${tr} ${size} ...... please wait"
+            echo "$(date +%m-%dT%H:%M:%S): running OpenMP ${tr} ${size} ...... please wait"
             { ./reduction_OpenMP $tr $size; } 2>&1 | tee -a $file
 
             # echo "running...... please wait" $waitsec "S" 
@@ -34,7 +34,7 @@ do
             file="./logs/${scriptname}_${datestring}.log"
             # echo $file
 
-            echo "${datestring}: running MPI ${tr} ${size} ...... please wait"
+            echo "$(date +%m-%dT%H:%M:%S): running MPI ${tr} ${size} ...... please wait"
             { mpiexec -n $tr ./reduction_MPI $size; } 2>&1 | tee -a $file
 
             # echo "running...... please wait" $waitsec "S" 
