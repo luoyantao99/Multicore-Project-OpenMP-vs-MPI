@@ -1,4 +1,4 @@
-# Comparing Parallel Programming Languages: OpenMP vs MPI
+# Comparing OpenMP and MPI
 
 Parallel computing has become an essential technique to achieve high-performance computing for large-scale scientific and engineering applications. Two popular parallel models are OpenMP, which stands for Open Multi-Processing, and MPI, which stands for Message Passing Interface. These models can help programmers divide a task into smaller pieces and utilize multi processors for better performance. Both models are widely used in modern high performance computing. 
 
