@@ -15,29 +15,33 @@ gcc -fopenmp -Wall -std=c99 -o reduction_OpenMP reduction_OpenMP.c -lm
 mpicc -g -Wall -std=c99 -o reduction_MPI reduction_MPI.c -lm
 ```
 
-Matrix Multiplication Benchmark: 
+### Matrix Multiplication Benchmark: 
 ```
 gcc -fopenmp -Wall -std=c99 -o matrix_OpenMP matrix_multiplication_OpenMP.c
 mpicc -g -Wall -std=c99 -o matrix_MPI matrix_multiplication_MPI.c -lm
 ```
 
-Overhead Benchmark: 
+### Overhead Benchmark: 
 ```
 gcc -fopenmp -Wall -std=c99 -o thread_creation_OpenMP thread_creation_OpenMP.c
 mpicc -g -Wall -std=c99 -o thread_creation_MPI thread_creation_MPI.c -lm
 ```
 
 Then we can run a benchmark with the specified number of threads/processes and problem size:
+
+### Reduction Benchmark: 
 ```
 ./reduction_OpenMP <number_of_threads> <array_length>
 mpiexec -n <number_of_processes> ./reduction_MPI <array_length>
 ```
 
+### Matrix Multiplication Benchmark: 
 ```
 ./matrix_OpenMP <number_of_threads> <matrix_dimension>
 mpiexec -n <number_of_processes> ./matrix_MPI <matrix_dimension>
 ```
 
+### Overhead Benchmark: 
 ```
 ./thread_creation_OpenMP <number of thread creation calls>
 mpiexec -n <number of processes to be created> ./thread_creation_MPI
