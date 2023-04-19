@@ -9,7 +9,7 @@ From former research we know that OpenMP is more programmable and less overhead 
 
 In order to run the benchmarks we must first compile the corresponding OpenMP and MPI programs: 
 
-Reduction Benchmark: 
+### Reduction Benchmark: 
 ```
 gcc -fopenmp -Wall -std=c99 -o reduction_OpenMP reduction_OpenMP.c -lm
 mpicc -g -Wall -std=c99 -o reduction_MPI reduction_MPI.c -lm
