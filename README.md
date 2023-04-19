@@ -7,29 +7,13 @@ From former research we know that OpenMP is more programmable and less overhead 
 
 ## Running Benchmarks
 
-In order to run the benchmarks we must first compile the corresponding OpenMP and MPI programs: 
+In order to run the benchmarks we must first compile the corresponding OpenMP and MPI programs. Then we can run a benchmark with the specified number of threads/processes and problem size:: 
 
 ### Reduction Benchmark: 
 ```
 gcc -fopenmp -Wall -std=c99 -o reduction_OpenMP reduction_OpenMP.c -lm
 mpicc -g -Wall -std=c99 -o reduction_MPI reduction_MPI.c -lm
 ```
-
-### Matrix Multiplication Benchmark: 
-```
-gcc -fopenmp -Wall -std=c99 -o matrix_OpenMP matrix_multiplication_OpenMP.c
-mpicc -g -Wall -std=c99 -o matrix_MPI matrix_multiplication_MPI.c -lm
-```
-
-### Overhead Benchmark: 
-```
-gcc -fopenmp -Wall -std=c99 -o thread_creation_OpenMP thread_creation_OpenMP.c
-mpicc -g -Wall -std=c99 -o thread_creation_MPI thread_creation_MPI.c -lm
-```
-
-Then we can run a benchmark with the specified number of threads/processes and problem size:
-
-### Reduction Benchmark: 
 ```
 ./reduction_OpenMP <number_of_threads> <array_length>
 mpiexec -n <number_of_processes> ./reduction_MPI <array_length>
@@ -37,12 +21,21 @@ mpiexec -n <number_of_processes> ./reduction_MPI <array_length>
 
 ### Matrix Multiplication Benchmark: 
 ```
+gcc -fopenmp -Wall -std=c99 -o matrix_OpenMP matrix_multiplication_OpenMP.c
+mpicc -g -Wall -std=c99 -o matrix_MPI matrix_multiplication_MPI.c -lm
+```
+```
 ./matrix_OpenMP <number_of_threads> <matrix_dimension>
 mpiexec -n <number_of_processes> ./matrix_MPI <matrix_dimension>
 ```
 
 ### Overhead Benchmark: 
 ```
+gcc -fopenmp -Wall -std=c99 -o thread_creation_OpenMP thread_creation_OpenMP.c
+mpicc -g -Wall -std=c99 -o thread_creation_MPI thread_creation_MPI.c -lm
+```
+```
 ./thread_creation_OpenMP <number of thread creation calls>
 mpiexec -n <number of processes to be created> ./thread_creation_MPI
 ```
+
