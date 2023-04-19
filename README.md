@@ -44,3 +44,10 @@ mpiexec -n <number of processes to be created> ./thread_creation_MPI
 Below we include some of the results of the experiments:
 
 ![Alt text](https://github.com/luoyantao99/Multicore-Project-OpenMP-vs-MPI/blob/main/img/Reduction%20Benchmark%204.png)
+![Alt text](https://github.com/luoyantao99/Multicore-Project-OpenMP-vs-MPI/blob/main/img/Reduction%20Benchmark%2032.png)
+![Alt text](https://github.com/luoyantao99/Multicore-Project-OpenMP-vs-MPI/blob/main/img/Matrix%20Multiplication%20time%20(N500).png)
+![Alt text](https://github.com/luoyantao99/Multicore-Project-OpenMP-vs-MPI/blob/main/img/Matrix%20Multiplication%20time%20(N2000).png)
+![Alt text](https://github.com/luoyantao99/Multicore-Project-OpenMP-vs-MPI/blob/main/img/OpenMP%20threads%20creation.png)
+![Alt text](https://github.com/luoyantao99/Multicore-Project-OpenMP-vs-MPI/blob/main/img/MPI%20processes%20creation.png)
+
+
