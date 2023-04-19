@@ -7,7 +7,7 @@ From former research we know that OpenMP is more programmable and less overhead 
 
 ## Running Benchmarks
 
-In order to run the benchmarks we must first compile the corresponding OpenMP and MPI programs. Then we can run a benchmark with the specified number of threads/processes and problem size:: 
+In order to run the benchmarks we must first compile the corresponding OpenMP and MPI programs. Then we can run a benchmark with the specified number of threads/processes and problem size:
 
 ### Reduction Benchmark: 
 ```
@@ -39,3 +39,8 @@ mpicc -g -Wall -std=c99 -o thread_creation_MPI thread_creation_MPI.c -lm
 mpiexec -n <number of processes to be created> ./thread_creation_MPI
 ```
 
+## Results
+
+Below we include some of the results of the experiments:
+
+![Alt text](img/Reduction Benchmark 4.png?raw=true "Iterations")
