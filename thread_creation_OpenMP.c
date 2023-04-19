@@ -3,11 +3,11 @@
 #include <omp.h>
 
 /*
- compile
- gcc -fopenmp -Wall -std=c99 -o thread_creation_OpenMP thread_creation_OpenMP.c
+compile
+gcc -fopenmp -Wall -std=c99 -o thread_creation_OpenMP thread_creation_OpenMP.c
 
- execute
- time ./thread_creation_OpenMP <number of thread creation>
+execute
+time ./thread_creation_OpenMP <number of thread creation calls>
 */
 
 int dummy_function() {
@@ -17,7 +17,7 @@ int dummy_function() {
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        printf("Usage: ./thread_creation_OpenMP <number of thread creation>\n");
+        printf("Usage: ./thread_creation_OpenMP <number of thread creation calls>\n");
         return 1;
     }
 
