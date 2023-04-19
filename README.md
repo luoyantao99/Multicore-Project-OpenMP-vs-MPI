@@ -36,7 +36,7 @@ mpicc -g -Wall -std=c99 -o thread_creation_MPI thread_creation_MPI.c -lm
 ```
 ```
 ./thread_creation_OpenMP <number of thread creation calls>
-mpiexec -n <number of processes to be created> ./thread_creation_MPI
+mpiexec -n <number of processes to create> ./thread_creation_MPI
 ```
 
 ## Results
