@@ -41,7 +41,7 @@ mpiexec -n <number of processes to create> ./thread_creation_MPI
 
 ## Results
 
-Below we include some of the results of the experiments:
+Below we include some of the results of the benchmarks:
 
 ![Alt text](https://github.com/luoyantao99/Multicore-Project-OpenMP-vs-MPI/blob/main/img/Reduction%20Benchmark%204.png)
 ![Alt text](https://github.com/luoyantao99/Multicore-Project-OpenMP-vs-MPI/blob/main/img/Reduction%20Benchmark%2032.png)
